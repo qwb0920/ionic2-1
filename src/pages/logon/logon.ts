@@ -26,7 +26,8 @@ export class Logon {
   }
 
   Logon(){
-    this.logonStatusService.Logon
+    this.logonStatusService.Logon();
+    this.navCtrl.push(MyApp)
   }
 
 }

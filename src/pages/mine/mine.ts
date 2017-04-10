@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { MyApp } from '../../app/app.component';
+
+import { LogonStatusService } from '../../providers/logon-status-service'
+
 /**
  * Generated class for the Mine page.
  *
@@ -14,7 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Mine {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public logonStatusService: LogonStatusService) {
   }
 
   ionViewDidLoad() {
@@ -22,7 +26,8 @@ export class Mine {
   }
 
   Exit(){
-    
+    this.logonStatusService.Exit();
+    // this.navCtrl.push(MyApp);
   }
 
 }

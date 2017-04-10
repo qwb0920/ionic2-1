@@ -34,11 +34,11 @@ export class LogonStatusService {
   }
 
   public Logon(){
-      this.storage.set("logon","")
-      this.storage.set("firstIn","")
+      this.storage.set("logon",true);
+      this.storage.set("firstIn",false);
   }
 
   public Exit(){
-
+      this.storage.set("logon",false);
   }
 }
