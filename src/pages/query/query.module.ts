@@ -9,6 +9,9 @@ import { Query } from './query';
   imports: [
     IonicModule,
   ],
+  entryComponents: [
+    Query
+  ],
   exports: [
     Query
   ]
