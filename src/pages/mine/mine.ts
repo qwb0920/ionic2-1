@@ -27,7 +27,7 @@ export class Mine {
 
   Exit(){
     this.logonStatusService.Exit();
-    // this.navCtrl.push(MyApp);
+    this.navCtrl.push(MyApp);
   }
 
 }
