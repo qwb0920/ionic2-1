@@ -7,12 +7,27 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>mine</ion-title>
+    <ion-title>我的</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="assets/img/avatar.jpg">
+      </ion-avatar>
+      <h2>Cher</h2>
+      <p>Ugh. As if.</p>
+    </ion-item>
+  </ion-list>
 
+  <ion-list>
+    <ion-item (click)="Exit()">
+      <ion-icon name="exit" item-left></ion-icon>
+      <ion-label>退出</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
