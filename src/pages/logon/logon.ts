@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
 import { MyApp } from '../../app/app.component';
+
+import { LogonStatusService } from '../../providers/logon-status-service';
 
 /**
  * Generated class for the Logon page.
@@ -15,19 +18,15 @@ import { MyApp } from '../../app/app.component';
 })
 export class Logon {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public logonStatusService: LogonStatusService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Logon');
   }
 
-  logon(){
-    this.storage.ready().then(() => {
-       this.storage.set('already-logged', 'true');
-     });
-
-     this.navCtrl.push(MyApp);
+  Logon(){
+    this.logonStatusService.Logon
   }
 
 }
