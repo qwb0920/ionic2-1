@@ -26,8 +26,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
+    IonicModule.forRoot(MyApp,{tabsHideOnSubPages:"true"}),
     QueryModule,
     MineModule,
   ],
