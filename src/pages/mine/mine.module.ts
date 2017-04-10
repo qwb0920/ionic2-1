@@ -9,6 +9,9 @@ import { Mine } from './mine';
   imports: [
     IonicModule,
   ],
+  entryComponents: [
+    Mine
+  ],
   exports: [
     Mine
   ]

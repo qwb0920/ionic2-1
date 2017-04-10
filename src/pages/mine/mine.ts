@@ -21,4 +21,8 @@ export class Mine {
     console.log('ionViewDidLoad Mine');
   }
 
+  Exit(){
+    
+  }
+
 }
