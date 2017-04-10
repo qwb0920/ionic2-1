@@ -13,8 +13,8 @@ import { LogonStatusService } from '../providers/logon-status-service';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage:any = TabsPage;
-  public rootPage:any;
+  rootPage:any = TabsPage;
+  // public rootPage:any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,logonStatusService: LogonStatusService) {
 
@@ -37,11 +37,11 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      console.log("app.component.ts")
-      console.log(logonStatusService.getFirstInStatus())
-      logonStatusService.getFirstInStatus().then((firstIn) => {
-        console.log(firstIn);
-      })
+      // console.log("app.component.ts")
+      // console.log(logonStatusService.getFirstInStatus())
+      // logonStatusService.getFirstInStatus().then((firstIn) => {
+      //   console.log(firstIn);
+      // })
 
     });
   }
