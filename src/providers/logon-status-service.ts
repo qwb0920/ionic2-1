@@ -26,23 +26,16 @@ export class LogonStatusService {
   public logon;
 
   public getFirstInStatus(){
-    this.storage.ready().then(() => {
-       return this.storage.get("firstIn").then((val) => {
-        this.firstIn = val;
-        // console.log(this.firstIn)
-        // return this.firstIn
-      })
-    })
+    return this.storage.get("firstIn")
+  }
+
+  public getLogonStatus(){
+    return this.storage.get("logon")
   }
 
   public Logon(){
-    this.storage.ready().then(() => {
-      this.storage.get("logon").then((val) => {
-        if(val){
-          // 
-        }
-      })
-    })
+      this.storage.set("logon","")
+      this.storage.set("firstIn","")
   }
 
   public Exit(){
