@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { Logon } from '../pages/logon/logon';
@@ -13,23 +12,10 @@ import { LogonStatusService } from '../providers/logon-status-service';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
-  // public rootPage:any;
+  // rootPage:any = TabsPage;
+  public rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,logonStatusService: LogonStatusService) {
-
-    // storage.get('already-logged').then(result => {
-    //   console.log(result)
-    //   if(result){
-    //     // 登录过账号，并且未注销。类似微信只需要登录一次，下次进入 App 不需要重复登录
-    //     this.rootPage = TabsPage;
-    //   }
-    //   else{
-    //     // APP 尚未登录账号
-    //     // TODO:是否为第一次登录，第一次登录需开启功能介绍页
-    //     this.rootPage = Logon;
-    //   }
-    // })
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public logonStatusService: LogonStatusService) {
     
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -37,12 +23,29 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      // console.log("app.component.ts")
-      // console.log(logonStatusService.getFirstInStatus())
-      // logonStatusService.getFirstInStatus().then((firstIn) => {
-      //   console.log(firstIn);
-      // })
-
+      logonStatusService.getFirstInStatus().then((status) => {
+        console.log(status)
+        // firstIn
+        if(status === null || status === true){
+          //  第一次进入应用
+          console.log("首次进入应用");
+          // TODO:增加应用功能介绍滑动页
+          this.rootPage = Logon;
+        }else{
+          //  不是首次进入应用，但是无法确定是否登录
+          console.log("再次进入应用");
+          logonStatusService.getLogonStatus().then((status) => {
+            // logon
+            if(status === null || status === false){
+              this.rootPage = Logon;
+            }else{
+              this.rootPage = TabsPage;
+            }
+          })
+        }
+      })
     });
   }
+
+  
 }
