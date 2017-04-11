@@ -14,19 +14,21 @@
 
 
 <ion-content padding>
-  <ion-list inset>
+  <form [formGroup]="logonForm" (ngSubmit)="Logon(logonForm.value)">
+    <ion-list>
 
-    <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>用户名</ion-label>
+        <ion-input type="text" formControlName="UserId"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>密码</ion-label>
+        <ion-input type="password" formControlName="UserPwd"></ion-input>
+      </ion-item>
 
-  </ion-list>
+    </ion-list>
 
-  <button ion-button block (click)="Logon()">登录</button>
+    <button ion-button block type="submit">登录</button>
+  </form>
 </ion-content>
