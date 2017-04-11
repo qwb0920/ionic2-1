@@ -33,8 +33,13 @@ export class LogonStatusService {
     return this.storage.get("logon")
   }
 
-  public Logon(){
+  public LogonSucc(){
       this.storage.set("logon",true);
+      this.storage.set("firstIn",false);
+  }
+
+  public LogonFail(){
+      this.storage.set("logon",false);
       this.storage.set("firstIn",false);
   }
 

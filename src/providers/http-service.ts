@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/timeout';
 
 import { ServiceRootPath, UUID, DeviceType } from './config';
 
@@ -28,11 +29,13 @@ export class HttpService {
     }
     let params = JSON.stringify(temp);
 
-    return this.http.post(ServiceRootPath+method,params).map(res=>{
+    return this.http.post(ServiceRootPath+method,params)
+    .timeout(5000)
+    .map(res=>{
       if(res.json().returnCode === 'SUCCESS'){
          return res.json().ResponseParams
       }else{
-        console.log("网络请求失败");
+        console.log("接口请求失败");
       }
       
     })
