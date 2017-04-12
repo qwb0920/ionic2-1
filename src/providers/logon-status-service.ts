@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class LogonStatusService {
 
   constructor(public storage: Storage) {
-    console.log('Hello LogonStatusService Provider');
+    
   }
 
   /**
@@ -22,8 +22,6 @@ export class LogonStatusService {
    * firstIn = null and true // 首次进入应用
    * firstIn = false // 并非首次进入
    */
-  public firstIn;
-  public logon;
 
   public getFirstInStatus(){
     return this.storage.get("firstIn")
