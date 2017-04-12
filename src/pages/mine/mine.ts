@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { MyApp } from '../../app/app.component';
+import { Settings } from './settings/settings'; 
 
 import { LogonStatusService } from '../../providers/logon-status-service'
 
@@ -20,8 +21,8 @@ export class Mine {
   constructor(public navCtrl: NavController, public navParams: NavParams, public logonStatusService: LogonStatusService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Mine');
+  Settings(){
+    this.navCtrl.push(Settings);
   }
 
   Exit(){
