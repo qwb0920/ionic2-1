@@ -33,7 +33,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
-    IonicModule.forRoot(MyApp,{tabsHideOnSubPages:"true"}),
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages:"true",
+      mode: 'ios',//android是'md'
+      backButtonText: '返回'
+    }),
     QueryModule,
     MineModule,
   ],

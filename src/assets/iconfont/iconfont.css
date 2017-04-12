@@ -8,7 +8,7 @@
 }
 
 /*.iconfont {
-  font-family:"Iconfonts";
+  font-family:"Ionicons"!important;
   font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
@@ -41,7 +41,10 @@
 
 .icon-icon01:before { content: "\e602"; }
 
-.ion-ios-icon-5:before,.ion-ios-icon-5-outline:before,.icon-5:before { content: "\e625"; }
+/*.ion-md-icon-5:before,*/
+.ion-ios-icon-5:before,
+.ion-ios-icon-5-outline:before,
+.icon-5:before { content: "\e625"; }
 
 .icon-iconfontyishiyong:before { content: "\e725"; }
 
@@ -99,7 +102,10 @@
 
 .icon-jiaoqiangxian:before { content: "\e613"; }
 
-.ion-ios-icon-shouye-shouye:before,.ion-ios-icon-shouye-shouye-outline:before,.icon-shouye-shouye:before { content: "\e601"; }
+/*.ion-md-icon-shouye-shouye:before,*/
+.ion-ios-icon-shouye-shouye:before,
+.ion-ios-icon-shouye-shouye-outline:before,
+.icon-shouye-shouye:before { content: "\e601"; }
 
 .icon-check1:before { content: "\e683"; }
 

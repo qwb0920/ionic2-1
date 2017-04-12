@@ -43,16 +43,18 @@ export class Logon {
       duration: 4500
     });
     loader.present();
+    return loader;
   }
 
   Logon(user){
     // this.navCtrl.push(MyApp);
-    this.showLoading();
+    let loader = this.showLoading();
     this.httpService.post('logon',user).subscribe(
       data => {
       if(data.Result === 'Y'){
           // 登录成功
           console.log(data.user);
+          loader.dismissAll();
           this.logonStatusService.LogonSucc();
           this.navCtrl.push(MyApp);
           
