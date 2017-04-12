@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>工作日志</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item.WorkBrief }}
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
