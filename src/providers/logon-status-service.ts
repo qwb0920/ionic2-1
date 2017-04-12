@@ -22,6 +22,17 @@ export class LogonStatusService {
    * firstIn = null and true // 首次进入应用
    * firstIn = false // 并非首次进入
    */
+  public setUser(user){
+    return this.storage.set("userinfo",user)
+  }
+
+  public getUser(){
+    return this.storage.get("userinfo")
+  }
+
+  public getUserID(){
+    return this.storage.get("userinfo").then((user) => user.UserID)
+  }
 
   public getFirstInStatus(){
     return this.storage.get("firstIn")
