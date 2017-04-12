@@ -54,6 +54,7 @@ export class Logon {
       if(data.Result === 'Y'){
           // 登录成功
           console.log(data.user);
+          this.logonStatusService.setUser(data.user);
           loader.dismissAll();
           this.logonStatusService.LogonSucc();
           this.navCtrl.push(MyApp);
