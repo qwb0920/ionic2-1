@@ -1,36 +1,65 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-import {HttpService} from '../../..//providers/http-service';
-import {LogonStatusService} from '../../..//providers/logon-status-service';
+import {HttpService} from '../../..//providers/http.service';
+import {LogonStatusService} from '../../../providers/logon-status.service';
+
+import {ListPage} from '../../../providers/list-page';
 
 @Component({selector: 'page-worklogs', templateUrl: 'worklogs.html'})
-export class WorkLogs {
-    public pageSize = 8;
+export class WorkLogs extends ListPage {
+    public pageSize = 10;
     public UserID;
-    public items;
+    public items = [];
 
-    constructor(public navCtrl : NavController, public httpService : HttpService, public logonStatusService : LogonStatusService) {}
+    constructor(public navCtrl : NavController, public httpService : HttpService, public logonStatusService : LogonStatusService) {
+        super();
+    }
 
     ionViewDidLoad() {
-        this.logonStatusService
+        console.log('ionViewDidLoad enter')
+        this
+            .logonStatusService
             .getUserID()
             .then((userid) => {
                 this.UserID = userid;
             })
+console.log('ionViewDidLoad out')
     }
 
     ionViewWillEnter() {
-        this.httpService
+        console.log('ionViewWillEnter enter')
+        this.loadList();
+        console.log('ionViewWillEnter out')
+    }
+
+    loadList(event
+        ?, pageNo = 1) {
+        this
+            .httpService
             .post("checklogs", {
-                pageNo: 1,
-                WorkBrief:'',
+                pageNo: pageNo,
+                WorkBrief: '',
                 pageSize: this.pageSize,
                 InputUserId: this.UserID
             })
             .subscribe((data) => {
                 console.log(data);
-                this.items = data.array;
+                if (pageNo == 1) {
+                    this.items = [];
+                }
+                for (let i = 0; i < data.array.length; i++) {
+
+                    this
+                        .items
+                        .push(data.array[i]);
+
+                }
+                if (event) {
+                    event.complete();
+                }
+
             }, error => console.log(error))
+
     }
 }
