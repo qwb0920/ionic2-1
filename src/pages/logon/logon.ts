@@ -4,8 +4,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 
 import { MyApp } from '../../app/app.component';
 
-import { LogonStatusService } from '../../providers/logon-status-service';
-import { HttpService } from '../../providers/http-service';
+import { LogonStatusService } from '../../providers/logon-status.service';
+import { HttpService } from '../../providers/http.service';
 
 /**
  * Generated class for the Logon page.
@@ -37,25 +37,15 @@ export class Logon {
     alert.present();
   }
 
-  showLoading() {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 4500
-    });
-    loader.present();
-    return loader;
-  }
-
   Logon(user){
     // this.navCtrl.push(MyApp);
-    let loader = this.showLoading();
+
     this.httpService.post('logon',user).subscribe(
       data => {
       if(data.Result === 'Y'){
           // 登录成功
           console.log(data.user);
           this.logonStatusService.setUser(data.user);
-          loader.dismissAll();
           this.logonStatusService.LogonSucc();
           this.navCtrl.push(MyApp);
           
