@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Logon } from '../pages/logon/logon';
 
-import { LogonStatusService } from '../providers/logon-status-service';
+import { LogonStatusService } from '../providers/logon-status.service';
 
 @Component({
   templateUrl: 'app.html'

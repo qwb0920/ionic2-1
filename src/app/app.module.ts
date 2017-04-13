@@ -12,8 +12,7 @@ import { MineModule } from '../pages/mine/mine.module';
 import { QueryModule } from '../pages/query/query.module';
 import { Logon } from '../pages/logon/logon';
 
-import { LogonStatusService } from '../providers/logon-status-service';
-import { HttpService } from '../providers/http-service';
+import { HttpService, LogonStatusService } from '../providers';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -52,9 +51,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    HttpService,
     Storage,
     LogonStatusService,
+    HttpService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
