@@ -5,7 +5,7 @@ import { MyApp } from '../../app/app.component';
 import { WorkLogs } from './worklogs/worklogs';
 import { Settings } from './settings/settings'; 
 
-import { LogonStatusService } from '../../providers/logon-status-service'
+import { LogonStatusService } from '../../providers/logon-status.service'
 
 /**
  * Generated class for the Mine page.
