@@ -8,33 +8,34 @@ import {ListPage} from '../../../providers/list-page';
 
 @Component({selector: 'page-worklogs', templateUrl: 'worklogs.html'})
 export class WorkLogs extends ListPage {
-    public pageSize = 10;
+    public pageSize = 8;
     public UserID;
     public items = [];
 
     constructor(public navCtrl : NavController, public httpService : HttpService, public logonStatusService : LogonStatusService) {
         super();
+
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad enter')
         this
             .logonStatusService
             .getUserID()
             .then((userid) => {
                 this.UserID = userid;
+                console.log(this.UserID);
             })
-console.log('ionViewDidLoad out')
     }
 
     ionViewWillEnter() {
-        console.log('ionViewWillEnter enter')
-        this.loadList();
-        console.log('ionViewWillEnter out')
+
+        this.loadList(null, this.pageNo++);
     }
 
     loadList(event
-        ?, pageNo = 1) {
+        ?, pageNo
+        ?) {
+        console.log("HttpService in");
         this
             .httpService
             .post("checklogs", {
@@ -44,6 +45,7 @@ console.log('ionViewDidLoad out')
                 InputUserId: this.UserID
             })
             .subscribe((data) => {
+                this.complete(event, data.array.length, pageNo, this.pageSize, data.totalCount)
                 console.log(data);
                 if (pageNo == 1) {
                     this.items = [];
@@ -54,9 +56,6 @@ console.log('ionViewDidLoad out')
                         .items
                         .push(data.array[i]);
 
-                }
-                if (event) {
-                    event.complete();
                 }
 
             }, error => console.log(error))
