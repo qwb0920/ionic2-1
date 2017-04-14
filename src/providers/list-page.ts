@@ -1,8 +1,10 @@
 import {OnInit} from '@angular/core';
+import {LogonStatusService} from './';
 
 export class ListPage implements OnInit {
 
-  public pageNo = 1;
+  public pageNo=1;
+  public infiniteScroll;
 
   ngOnInit() {
     console.log("ngOnInit")
@@ -10,19 +12,36 @@ export class ListPage implements OnInit {
 
   doRefresh(event) {
     this.pageNo = 1;
-    this.loadList(event,this.pageNo);
+    this.loadList(event,this.pageNo++);
+
+    if(this.infiniteScroll){
+      this.infiniteScroll.enable(true);
+    }
   }
 
   loadList(event, pageNo?) {}
 
-  doInfinite(event) {
-    console.log(event);
-    console.log("1111111");
+  doInfinite(infiniteScroll) {
+    this.infiniteScroll = infiniteScroll
+    console.log(infiniteScroll);
+
     console.log(this.pageNo);
-    console.log("22222222");
-    this.loadList(event, this.pageNo);
+
+    this.loadList(infiniteScroll, this.pageNo);
     this.pageNo++;
 
+  }
+
+  complete(event,currentArrayLength,currentPageNo,pageSize,totalCount){
+    
+    if(event){
+      event.complete();
+    }
+    console.log(event,currentArrayLength,currentPageNo,pageSize,totalCount);
+    if(currentArrayLength < pageSize || currentPageNo*pageSize == totalCount){
+      // 到了最后一页
+      event.enable(false);
+    }
   }
 
 }
