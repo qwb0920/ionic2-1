@@ -1,25 +1,25 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-import {HttpService} from '../../..//providers/http.service';
+import { WorkLogsDetail } from './worklogsdetail/worklogsdetail';
+
+import {HttpService} from '../../../providers/http.service';
 import {LogonStatusService} from '../../../providers/logon-status.service';
 
 import {ListPage} from '../../../providers/list-page';
 
 @Component({selector: 'page-worklogs', templateUrl: 'worklogs.html'})
 export class WorkLogs extends ListPage {
-    public pageSize = 8;
+    public pageSize = 10;
     public UserID;
     public items = [];
 
     constructor(public navCtrl : NavController, public httpService : HttpService, public logonStatusService : LogonStatusService) {
         super();
-
     }
 
     ionViewDidLoad() {
-        this
-            .logonStatusService
+        this.logonStatusService
             .getUserID()
             .then((userid) => {
                 this.UserID = userid;
@@ -28,16 +28,12 @@ export class WorkLogs extends ListPage {
     }
 
     ionViewWillEnter() {
-
-        this.loadList(null, this.pageNo++);
+        this.loadList();
     }
 
-    loadList(event
-        ?, pageNo
-        ?) {
+    loadList(event?, pageNo=1) {
         console.log("HttpService in");
-        this
-            .httpService
+        this.httpService
             .post("checklogs", {
                 pageNo: pageNo,
                 WorkBrief: '',
@@ -45,20 +41,15 @@ export class WorkLogs extends ListPage {
                 InputUserId: this.UserID
             })
             .subscribe((data) => {
-                this.complete(event, data.array.length, pageNo, this.pageSize, data.totalCount)
+                this.handleData(event,data, pageNo, this.pageSize)
                 console.log(data);
-                if (pageNo == 1) {
-                    this.items = [];
-                }
-                for (let i = 0; i < data.array.length; i++) {
-
-                    this
-                        .items
-                        .push(data.array[i]);
-
-                }
-
             }, error => console.log(error))
+    }
 
+    gotoLogDetail(item){
+        console.log(item);
+        this.navCtrl.push(WorkLogsDetail,{
+            item:item
+        })
     }
 }
