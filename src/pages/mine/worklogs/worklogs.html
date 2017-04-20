@@ -15,8 +15,12 @@
 
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
+  <ion-list *ngIf="noData">
+    <ion-item>暂无数据</ion-item>
+  </ion-list>
+
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items" (click)="gotoLogDetail(item)">
       {{ item.WorkBrief }}
     </ion-item>
   </ion-list>
