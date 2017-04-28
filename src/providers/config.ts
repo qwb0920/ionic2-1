@@ -1,5 +1,5 @@
-export const ServiceRootPath = "http://192.168.62.73:8180/ALS7M/JSONService?method=";
-export const ServiceRealRootPath = "http://192.168.62.73:8180/ALS7M";
+export const ServiceRootPath = "http://192.168.62.112:8180/ALS7M/JSONService?method=";
+export const ServiceRealRootPath = "http://192.168.62.112:8180/ALS7M";
 
 export const UUID = "00:9a:cd:50:dd:42";
 
