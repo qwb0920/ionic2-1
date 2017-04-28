@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component, Input} from '@angular/core';
+import {trigger, state, style, animate, transition} from '@angular/animations';
+import {NavController, NavParams} from 'ionic-angular';
 
-import { MyApp } from '../../app/app.component';
-import { WorkLogs } from './worklogs/worklogs';
-import { Settings } from './settings/settings'; 
+import {MyApp} from '../../app/app.component';
+import {WorkLogs} from './worklogs/worklogs';
+import {Settings} from './settings/settings';
 
-import { LogonStatusService } from '../../providers/logon-status.service'
+import {LogonStatusService} from '../../providers/logon-status.service';
 
 /**
  * Generated class for the Mine page.
@@ -16,34 +17,66 @@ import { LogonStatusService } from '../../providers/logon-status.service'
 @Component({
   selector: 'page-mine',
   templateUrl: 'mine.html',
+  animations: [trigger('scaleState', [
+      state('inactive', style({transform: 'scale(1)'})),
+      state('active', style({transform: 'scale(1.1)'})),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out'))
+    ])]
 })
 export class Mine {
-  public user ={
-    UserID:'',
-    OrgName:'',
+
+  color = "green";
+
+  public user = {
+    UserID: '',
+    OrgName: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public logonStatusService: LogonStatusService) {
-      
+  public mine = {
+    state: "inactive"
   }
+
+  constructor(public navCtrl : NavController, public navParams : NavParams, public logonStatusService : LogonStatusService) {}
 
   ionViewDidLoad() {
-    this.logonStatusService.getUser().then((val) => {
-            this.user = val;
-          });
+    this
+      .logonStatusService
+      .getUser()
+      .then((val) => {
+        this.user = val;
+      });
   }
 
-  WorkLogs(){
-    this.navCtrl.push(WorkLogs);
+  WorkLogs() {
+    this
+      .navCtrl
+      .push(WorkLogs);
   }
 
-  Settings(){
-    this.navCtrl.push(Settings);
+  changeState() {
+    if (this.mine.state === "inactive") {
+      this.mine.state = "active";
+    } else {
+      this.mine.state = "inactive";
+    }
   }
 
-  Exit(){
-    this.logonStatusService.Exit();
-    this.navCtrl.push(MyApp);
+  Settings() {
+    this
+      .navCtrl
+      .push(Settings,null,{
+        animate:false,
+      });
+  }
+
+  Exit() {
+    this
+      .logonStatusService
+      .Exit();
+    this
+      .navCtrl
+      .push(MyApp);
   }
 
 }
